@@ -2,10 +2,6 @@
 
 class FtpStorage
 {
-    private $host;
-    private $user;
-    private $password;
-    private $port;
     private $ftp;
 
     /**
@@ -17,12 +13,8 @@ class FtpStorage
      */
     public function __construct($host, $user, $password, $port)
     {
-        $this->host = $host;
-        $this->user = $user;
-        $this->password = $password;
-        $this->port = $port;
-        $this->ftp = ftp_connect($this->host, $this->port) or die('Couldn\'t connect');
-        ftp_login($this->ftp, $this->user, $this->password) or die('Couldn\'t login');
+        $this->ftp = ftp_connect($host, $port) or die('Couldn\'t connect to your ftp server');
+        ftp_login($this->ftp, $user, $password) or die('Couldn\'t login to your ftp account');
         ftp_pasv($this->ftp, true);
     }
 
